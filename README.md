@@ -35,8 +35,10 @@ npm install -g miio homebridge-mi-airpurifier
         "type": "AirPurifier",
         "ip": "192.168.88.xx",
         "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "airPurifierDisable": false,
         "airPurifierName": "AirPurifier",
-        "airPurifierSilentModeName": "AirPurifier Silent Mode Switch",
+        "silentModeSwitchDisable": false,
+        "silentModeSwitchName": "AirPurifier Silent Mode Switch",
         "temperatureDisable": false,
         "temperatureName": "Temperature",
         "humidityDisable": false,
@@ -51,8 +53,10 @@ npm install -g miio homebridge-mi-airpurifier
         "type": "AirPurifier2",
         "ip": "192.168.88.xx",
         "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "airPurifierDisable": false,
         "airPurifierName": "AirPurifier",
-        "airPurifierSilentModeName": "AirPurifier Silent Mode Switch",
+        "silentModeSwitchDisable": false,
+        "silentModeSwitchName": "AirPurifier Silent Mode Switch",
         "temperatureDisable": false,
         "temperatureName": "Temperature",
         "humidityDisable": false,
@@ -67,8 +71,10 @@ npm install -g miio homebridge-mi-airpurifier
         "type": "AirPurifierPro",
         "ip": "192.168.88.xx",
         "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "airPurifierDisable": false,
         "airPurifierName": "AirPurifier",
-        "airPurifierSilentModeName": "AirPurifier Silent Mode Switch",
+        "silentModeSwitchDisable": false,
+        "silentModeSwitchName": "AirPurifier Silent Mode Switch",
         "temperatureDisable": false,
         "temperatureName": "Temperature",
         "humidityDisable": false,
@@ -106,6 +112,10 @@ Wait until you get output.
 For more information about token, please refer to [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol) and [miio](https://github.com/aholstenson/miio).   
 
 ## Version Logs
+### 0.0.2
+1.fixed bug that can not startup.   
+2.add setting silent mode switch disable feature.   
+3.optimized code.   
 ### 0.0.1
 1.support for XiaoMi AirPurifier.   
 2.support for XiaoMi AirPurifier2.   

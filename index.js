@@ -1,5 +1,5 @@
-require('./Devices/AirPurifier');
 require('./Devices/AirPurifier2');
+require('./Devices/AirPurifier');
 require('./Devices/AirPurifierPro');
 
 var fs = require('fs');
