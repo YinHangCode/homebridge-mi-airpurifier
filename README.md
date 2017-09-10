@@ -112,6 +112,8 @@ Wait until you get output.
 For more information about token, please refer to [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol) and [miio](https://github.com/aholstenson/miio).   
 
 ## Version Logs
+### 0.0.3
+1.fixed bug that air purifier accessory disable when set "silentModeSwitchDisable" value is true.   
 ### 0.0.2
 1.fixed bug that can not startup.   
 2.add setting silent mode switch disable feature.   

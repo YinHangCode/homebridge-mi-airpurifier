@@ -20,7 +20,7 @@ AirPurifier2 = function(platform, config) {
     });
     
     this.accessories = {};
-    if(!this.config['airPurifierDisable'] && this.config['airPurifierName'] && this.config['airPurifierName'] != "" && !this.config['silentModeSwitchDisable'] && this.config['silentModeSwitchName'] && this.config['silentModeSwitchName'] != "") {
+    if(!this.config['airPurifierDisable'] && this.config['airPurifierName'] && this.config['airPurifierName'] != "" && this.config['silentModeSwitchName'] && this.config['silentModeSwitchName'] != "") {
         this.accessories['airPurifierAccessory'] = new AirPurifier2AirPurifierAccessory(this);
     }
     if(!this.config['temperatureDisable'] && this.config['temperatureName'] && this.config['temperatureName'] != "") {
