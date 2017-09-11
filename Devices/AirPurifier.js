@@ -100,7 +100,7 @@ AirPurifierAirPurifierAccessory.prototype.getServices = function() {
                         targetAirPurifierStateCharacteristic.updateValue(Characteristic.TargetAirPurifierState.AUTO);
                         callback(null);
                     } else {
-                        callback(result[0]);
+                        callback(new Error(result[0]));
                     }
                 }).catch(function(err) {
                     that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierAirPurifierAccessory - SilentModeSwitch - setOn Error: " + err);
@@ -112,7 +112,7 @@ AirPurifierAirPurifierAccessory.prototype.getServices = function() {
                     if(result[0] === "ok") {
                         callback(null);
                     } else {
-                        callback(result[0]);
+                        callback(new Error(result[0]));
                     }
                 }).catch(function(err) {
                     that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierAirPurifierAccessory - SilentModeSwitch - setOn Error: " + err);
@@ -149,7 +149,7 @@ AirPurifierAirPurifierAccessory.prototype.getServices = function() {
                         currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.INACTIVE);
                     }
                 } else {
-                    callback(result[0]);
+                    callback(new Error(result[0]));
                 }
             }).catch(function(err) {
                 that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierAirPurifierAccessory - Active - setActive Error: " + err);
@@ -189,7 +189,7 @@ AirPurifierAirPurifierAccessory.prototype.getServices = function() {
                 if(result[0] === "ok") {
                     callback(null);
                 } else {
-                    callback(result[0]);
+                    callback(new Error(result[0]));
                 }
             }).catch(function(err) {
                 that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierAirPurifierAccessory - LockPhysicalControls - setLockPhysicalControls Error: " + err);
@@ -235,7 +235,7 @@ AirPurifierAirPurifierAccessory.prototype.getServices = function() {
                         });
                     }
                 } else {
-                    callback(result[0]);
+                    callback(new Error(result[0]));
                 }
             }).catch(function(err) {
                 that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierAirPurifierAccessory - TargetAirPurifierState - setTargetAirPurifierState Error: " + err);
@@ -268,14 +268,14 @@ AirPurifierAirPurifierAccessory.prototype.getServices = function() {
                                 silentModeOnCharacteristic.updateValue(false);
                                 callback(null);
                             } else {
-                                callback(result[0]);
+                                callback(new Error(result[0]));
                             }
                         }).catch(function(err) {
                             that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierAirPurifierAccessory - RotationSpeed - setTargetAirPurifierState Error: " + err);
                             callback(err);
                         });
                     } else {
-                        callback(result[0]);
+                        callback(new Error(result[0]));
                     }
                 }).catch(function(err) {
                     that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierAirPurifierAccessory - TargetAirPurifierState - getRotationSpeed: " + err);
@@ -430,7 +430,7 @@ AirPurifierBuzzerSwitchAccessory.prototype.setBuzzerState = function(value, call
         if(result[0] === "ok") {
             callback(null);
         } else {
-            callback(result[0]);
+            callback(new Error(result[0]));
         }            
     }).catch(function(err) {
         that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierBuzzerSwitchAccessory - BuzzerSwitch - setBuzzerState Error: " + err);
@@ -510,7 +510,7 @@ AirPurifierLEDBulbAccessory.prototype.setLedB = function(led_b, callback) {
         if(result[0] === "ok") {
             callback(null);
         } else {
-            callback(result[0]);
+            callback(new Error(result[0]));
         }
     }).catch(function(err) {
         that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifierLEDBulbAccessory - switchLED - setLEDBrightness Error: " + err);
