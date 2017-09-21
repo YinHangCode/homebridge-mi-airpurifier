@@ -49,6 +49,7 @@ inherits(AirPurifier, Base);
 AirPurifierAirPurifierAccessory = function(dThis) {
     this.device = dThis.device;
     this.name = dThis.config['airPurifierName'];
+    this.silentModeSwitchDisable = dThis.config['silentModeSwitchDisable'];
     this.silentModeSwitchName = dThis.config['silentModeSwitchName'];
     this.platform = dThis.platform;
 }
@@ -66,7 +67,7 @@ AirPurifierAirPurifierAccessory.prototype.getServices = function() {
 
     var silentModeSwitch = new Service.Switch(this.silentModeSwitchName);
     var silentModeOnCharacteristic = silentModeSwitch.getCharacteristic(Characteristic.On);
-    if(this.silentModeSwitchDisable) {
+    if(!this.silentModeSwitchDisable) {
         services.push(silentModeSwitch);
     }
     

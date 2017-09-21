@@ -67,7 +67,7 @@ AirPurifier2AirPurifierAccessory.prototype.getServices = function() {
 
     var silentModeSwitch = new Service.Switch(this.silentModeSwitchName);
     var silentModeOnCharacteristic = silentModeSwitch.getCharacteristic(Characteristic.On);
-    if(this.silentModeSwitchDisable) {
+    if(!this.silentModeSwitchDisable) {
         services.push(silentModeSwitch);
     }
     

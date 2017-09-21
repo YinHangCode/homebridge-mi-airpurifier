@@ -29,7 +29,7 @@ AirPurifierPro = function(platform, config) {
     if(!this.config['humidityDisable'] && this.config['humidityName'] && this.config['humidityName'] != "") {
         this.accessories['humidityAccessory'] = new AirPurifierProHumidityAccessory(this);
     }
-    if(!this.config['buzzerSwitchDisable'] && this.config['buzzerSwitchDisable'] && this.config['buzzerSwitchName'] != "") {
+    if(!this.config['buzzerSwitchDisable'] && this.config['buzzerSwitchName'] && this.config['buzzerSwitchName'] != "") {
 //      this.accessories['buzzerSpeakerAccessory'] = new AirPurifierProBuzzerSpeakerAccessory(this);
         this.accessories['buzzerSwitchAccessory'] = new AirPurifierProBuzzerSwitchAccessory(this);
     }
@@ -50,6 +50,7 @@ inherits(AirPurifierPro, Base);
 AirPurifierProAirPurifierAccessory = function(dThis) {
     this.device = dThis.device;
     this.name = dThis.config['airPurifierName'];
+    this.silentModeSwitchDisable = dThis.config['silentModeSwitchDisable'];
     this.silentModeSwitchName = dThis.config['silentModeSwitchName'];
     this.platform = dThis.platform;
 }
@@ -67,7 +68,7 @@ AirPurifierProAirPurifierAccessory.prototype.getServices = function() {
 
     var silentModeSwitch = new Service.Switch(this.silentModeSwitchName);
     var silentModeOnCharacteristic = silentModeSwitch.getCharacteristic(Characteristic.On);
-    if(this.silentModeSwitchDisable) {
+    if(!this.silentModeSwitchDisable) {
         services.push(silentModeSwitch);
     }
     
@@ -537,7 +538,6 @@ AirPurifierProLEDBulbAccessory.prototype.getServices = function() {
     
     var switchLEDService = new Service.Lightbulb(this.name);
     var onCharacteristic = switchLEDService.getCharacteristic(Characteristic.On);
-    var brightnessCharacteristic = switchLEDService.addCharacteristic(Characteristic.Brightness);
     
     onCharacteristic
         .on('get', function(callback) {
@@ -566,16 +566,6 @@ AirPurifierProLEDBulbAccessory.prototype.getServices = function() {
     services.push(switchLEDService);
 
     return services;
-}
-
-getLevelByBrightness = function(brightness) {
-    if(brightness == 0) {
-        return 2;
-    } else if(brightness > 0 && brightness <= 50) {
-        return 1;
-    } else if (brightness > 50 && brightness <= 100) {
-        return 0;
-    }
 }
 
 AirPurifierProAirQualityAccessory = function(dThis) {
