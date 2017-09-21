@@ -20,7 +20,7 @@ AirPurifierPro = function(platform, config) {
     });
 
     this.accessories = {};
-    if(!this.config['airPurifierDisable'] && this.config['airPurifierName'] && this.config['airPurifierName'] != "" && this.config['airPurifierSilentModeName'] && this.config['airPurifierSilentModeName'] != "") {
+    if(!this.config['airPurifierDisable'] && this.config['airPurifierName'] && this.config['airPurifierName'] != "" && this.config['silentModeSwitchName'] && this.config['silentModeSwitchName'] != "") {
         this.accessories['airPurifierAccessory'] = new AirPurifierProAirPurifierAccessory(this);
     }
     if(!this.config['temperatureDisable'] && this.config['temperatureName'] && this.config['temperatureName'] != "") {
@@ -50,7 +50,7 @@ inherits(AirPurifierPro, Base);
 AirPurifierProAirPurifierAccessory = function(dThis) {
     this.device = dThis.device;
     this.name = dThis.config['airPurifierName'];
-    this.airPurifierSilentModeName = dThis.config['airPurifierSilentModeName'];
+    this.silentModeSwitchName = dThis.config['silentModeSwitchName'];
     this.platform = dThis.platform;
 }
 
@@ -65,9 +65,11 @@ AirPurifierProAirPurifierAccessory.prototype.getServices = function() {
         .setCharacteristic(Characteristic.SerialNumber, "Undefined");
     services.push(infoService);
 
-    var silentModeSwitch = new Service.Switch(this.airPurifierSilentModeName);
+    var silentModeSwitch = new Service.Switch(this.silentModeSwitchName);
     var silentModeOnCharacteristic = silentModeSwitch.getCharacteristic(Characteristic.On);
-    services.push(silentModeSwitch);
+    if(this.silentModeSwitchDisable) {
+        services.push(silentModeSwitch);
+    }
     
     var airPurifierService = new Service.AirPurifier(this.name);
     var activeCharacteristic = airPurifierService.getCharacteristic(Characteristic.Active);

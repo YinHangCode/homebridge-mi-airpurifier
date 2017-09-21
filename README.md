@@ -112,6 +112,8 @@ Wait until you get output.
 For more information about token, please refer to [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol) and [miio](https://github.com/aholstenson/miio).   
 
 ## Version Logs
+### 0.0.5
+1.fixed bug that "AirPurifier" and "AirPurifierPro" air purifier accessory don't display.   
 ### 0.0.4
 1.optimized code.   
 ### 0.0.3
