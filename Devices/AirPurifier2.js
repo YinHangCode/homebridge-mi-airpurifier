@@ -100,6 +100,7 @@ AirPurifier2AirPurifierAccessory.prototype.getServices = function() {
                 that.device.call("set_mode", ["silent"]).then(result => {
                     that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]AirPurifier2AirPurifierAccessory - SilentModeSwitch - setOn Result: " + result);
                     if(result[0] === "ok") {
+                        currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.PURIFYING_AIR);
                         targetAirPurifierStateCharacteristic.updateValue(Characteristic.TargetAirPurifierState.AUTO);
                         callback(null);
                     } else {
