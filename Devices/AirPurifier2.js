@@ -150,6 +150,7 @@ AirPurifier2AirPurifierAccessory.prototype.getServices = function() {
                     if(value) {
                         currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.PURIFYING_AIR);
                     } else {
+                        silentModeOnCharacteristic.updateValue(false);
                         currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.INACTIVE);
                     }
                 } else {
