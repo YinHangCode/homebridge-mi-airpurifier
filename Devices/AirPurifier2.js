@@ -102,6 +102,11 @@ AirPurifier2AirPurifierAccessory.prototype.getServices = function() {
                     if(result[0] === "ok") {
                         targetAirPurifierStateCharacteristic.updateValue(Characteristic.TargetAirPurifierState.AUTO);
                         callback(null);
+                        
+                        if(Characteristic.Active.INACTIVE == activeCharacteristic.value) {
+                            activeCharacteristic.updateValue(Characteristic.Active.ACTIVE);
+                            currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.PURIFYING_AIR);
+                        }
                     } else {
                         callback(new Error(result[0]));
                     }
@@ -110,17 +115,21 @@ AirPurifier2AirPurifierAccessory.prototype.getServices = function() {
                     callback(err);
                 });
             } else {
-                that.device.call("set_mode", [Characteristic.TargetAirPurifierState.AUTO == targetAirPurifierStateCharacteristic.value ? "auto" : "favorite"]).then(result => {
-                    that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]AirPurifier2AirPurifierAccessory - SilentModeSwitch - setOn Result: " + result);
-                    if(result[0] === "ok") {
-                        callback(null);
-                    } else {
-                        callback(new Error(result[0]));
-                    }
-                }).catch(function(err) {
-                    that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifier2AirPurifierAccessory - SilentModeSwitch - setOn Error: " + err);
-                    callback(err);
-                });
+                if(Characteristic.Active.INACTIVE == activeCharacteristic.value) {
+                    callback(null);
+                } else {
+                    that.device.call("set_mode", [Characteristic.TargetAirPurifierState.AUTO == targetAirPurifierStateCharacteristic.value ? "auto" : "favorite"]).then(result => {
+                        that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]AirPurifier2AirPurifierAccessory - SilentModeSwitch - setOn Result: " + result);
+                        if(result[0] === "ok") {
+                            callback(null);
+                        } else {
+                            callback(new Error(result[0]));
+                        }
+                    }).catch(function(err) {
+                        that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifier2AirPurifierAccessory - SilentModeSwitch - setOn Error: " + err);
+                        callback(err);
+                    });
+                }
             }
         }.bind(this));
     
@@ -148,8 +157,19 @@ AirPurifier2AirPurifierAccessory.prototype.getServices = function() {
                     callback(null);
                     if(value) {
                         currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.PURIFYING_AIR);
+                        that.device.call("get_prop", ["mode"]).then(result => {
+                            if(result[0] === "silent") {
+                                silentModeOnCharacteristic.updateValue(true);
+                            } else {
+                                silentModeOnCharacteristic.updateValue(false);
+                            }
+                        }).catch(function(err) {
+                            that.platform.log.error("[MiAirPurifierPlatform][ERROR]AirPurifier2AirPurifierAccessory - Active - setActive Error: " + err);
+                            callback(err);
+                        });
                     } else {
                         currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.INACTIVE);
+                        silentModeOnCharacteristic.updateValue(false);
                     }
                 } else {
                     callback(new Error(result[0]));

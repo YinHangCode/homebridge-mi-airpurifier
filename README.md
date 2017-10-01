@@ -2,7 +2,7 @@
 [![npm version](https://badge.fury.io/js/homebridge-mi-airpurifier.svg)](https://badge.fury.io/js/homebridge-mi-airpurifier)
 
 XiaoMi air purifier plugins for HomeBridge.   
-Thanks for [nfarina](https://github.com/nfarina)(the author of [homebridge](https://github.com/nfarina/homebridge)), [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol), [aholstenson](https://github.com/aholstenson)(the author of [miio](https://github.com/aholstenson/miio)), [licuhui](https://github.com/licuhui), all other developer and testers.   
+Thanks for [nfarina](https://github.com/nfarina)(the author of [homebridge](https://github.com/nfarina/homebridge)), [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol), [aholstenson](https://github.com/aholstenson)(the author of [miio](https://github.com/aholstenson/miio)), [licuhui](https://github.com/licuhui), [superszy](https://github.com/superszy), all other developer and testers.   
 
 **Note: I have only a part of these devices, so some devices don't have tested. If you find bugs, please submit them to [issues](https://github.com/YinHangCode/homebridge-mi-airpurifier/issues) or [QQ Group: 107927710](//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d).**   
 
@@ -112,6 +112,8 @@ Wait until you get output.
 For more information about token, please refer to [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol) and [miio](https://github.com/aholstenson/miio).   
 
 ## Version Logs
+### 0.0.7
+1.fixed bug that linkage issues between silent mode switch accessory and air purifier accessory.   
 ### 0.0.6
 1.fixed bug that silent mode switch accessory don't display.   
 2.fixed bug that "AirPurifierPro" led light accessory display brightness.    
