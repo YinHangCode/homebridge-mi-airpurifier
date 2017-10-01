@@ -101,6 +101,7 @@ AirPurifierProAirPurifierAccessory.prototype.getServices = function() {
                 that.device.call("set_mode", ["silent"]).then(result => {
                     that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]AirPurifierProAirPurifierAccessory - SilentModeSwitch - setOn Result: " + result);
                     if(result[0] === "ok") {
+                        currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.PURIFYING_AIR);
                         targetAirPurifierStateCharacteristic.updateValue(Characteristic.TargetAirPurifierState.AUTO);
                         callback(null);
                         
@@ -169,6 +170,7 @@ AirPurifierProAirPurifierAccessory.prototype.getServices = function() {
                             callback(err);
                         });
                     } else {
+                        silentModeOnCharacteristic.updateValue(false);
                         currentAirPurifierStateCharacteristic.updateValue(Characteristic.CurrentAirPurifierState.INACTIVE);
                         silentModeOnCharacteristic.updateValue(false);
                     }
