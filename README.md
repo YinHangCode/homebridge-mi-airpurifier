@@ -108,6 +108,8 @@ Wait until you get output.
 For more information about token, please refer to [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol) and [miio](https://github.com/aholstenson/miio).   
 
 ## Version Logs
+### 0.0.9
+1.fixed bug that "AirPurifierPro" power status display inaccurate.   
 ### 0.0.8
 1.fixed bug that "AirPurifier" can not work.   
 ### 0.0.7

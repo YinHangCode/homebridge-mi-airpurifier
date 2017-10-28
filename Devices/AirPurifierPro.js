@@ -136,10 +136,10 @@ AirPurifierProAirPurifierAccessory.prototype.getServices = function() {
     
     activeCharacteristic
         .on('get', function(callback) {
-            that.device.call("get_prop", ["mode"]).then(result => {
+            that.device.call("get_prop", ["power"]).then(result => {
                 that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]AirPurifierProAirPurifierAccessory - Active - getActive: " + result);
                 
-                if(result[0] === "idle") {
+                if(result[0] === "off") {
                     callback(null, Characteristic.Active.INACTIVE);
                 } else {
                     callback(null, Characteristic.Active.ACTIVE);
@@ -183,10 +183,10 @@ AirPurifierProAirPurifierAccessory.prototype.getServices = function() {
        
     currentAirPurifierStateCharacteristic
         .on('get', function(callback) {
-            that.device.call("get_prop", ["mode"]).then(result => {
+            that.device.call("get_prop", ["power"]).then(result => {
                 that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]AirPurifierProAirPurifierAccessory - CurrentAirPurifierState - getCurrentAirPurifierState: " + result);
                 
-                if(result[0] === "idle") {
+                if(result[0] === "off") {
                     callback(null, Characteristic.CurrentAirPurifierState.INACTIVE);
                 } else {
                     callback(null, Characteristic.CurrentAirPurifierState.PURIFYING_AIR);
