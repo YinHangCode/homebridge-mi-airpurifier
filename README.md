@@ -9,11 +9,13 @@ Thanks for [nfarina](https://github.com/nfarina)(the author of [homebridge](http
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-airpurifier/master/images/AirPurifier.jpg)
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-airpurifier/master/images/AirPurifier2.jpg)
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-airpurifier/master/images/AirPurifierPro.jpg)
+![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-airpurifier/master/images/AirPurifier2S.jpg)
 
 ## Supported Devices
 1.AirPurifier(小米空气净化器)   
 2.AirPurifier2(小米空气净化器2)   
 3.AirPurifierPro(小米空气净化器Pro)   
+4.AirPurifier2S(小米空气净化器2S) --- coming soon   
 
 ## Pre-Requirements
 1.Make sure your IOS version is ios11 or later.   
