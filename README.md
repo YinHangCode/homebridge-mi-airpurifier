@@ -135,7 +135,7 @@ Wait until you get output.
 For more information about token, please refer to [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol) and [miio](https://github.com/aholstenson/miio).   
 
 ## Version Logs
-### [2017-11-16]0.1.0
+### 0.1.0 (2017-11-16)
 1.support for XiaoMi AirPurifier2S.   
 2.modify class name, reduce the probability of conflicts due to the same class name and other plugins.   
 ### 0.0.9 (2017-10-28)
