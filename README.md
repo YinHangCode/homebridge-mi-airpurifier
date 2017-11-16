@@ -111,7 +111,7 @@ setup MiJia(MiHome) app in your android device or android virtual machine.
 open MiJia(MiHome) app and login your account.   
 refresh device list and make sure device display in the device list.   
 get miio2.db(path: /data/data/com.xiaomi.smarthome/databases/miio2.db) file from your android device or android virtual machine.   
-open website [Get MiIo Tokens By DataBase File](http://miio2.yinhh.com/), upload miio2.db file and submit.    
+open website [[Get MiIo Tokens By DataBase File](http://miio2.yinhh.com/)], upload miio2.db file and submit.    
 ### Get token by network
 Open command prompt or terminal. Run following command:
 ```
