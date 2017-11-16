@@ -1,6 +1,7 @@
-require('./Devices/AirPurifier2');
-require('./Devices/AirPurifier');
-require('./Devices/AirPurifierPro');
+require('./Devices/MiAirPurifier2');
+require('./Devices/MiAirPurifier');
+require('./Devices/MiAirPurifierPro');
+require('./Devices/MiAirPurifier2S');
 
 var fs = require('fs');
 var packageFile = require("./package.json");
@@ -83,16 +84,20 @@ MiAirPurifierPlatform.prototype = {
                     continue;
                 }
                 
-                if (deviceCfg['type'] == "AirPurifier") {
-                    new AirPurifier(this, deviceCfg).forEach(function(accessory, index, arr){
+                if (deviceCfg['type'] == "MiAirPurifier") {
+                    new MiAirPurifier(this, deviceCfg).forEach(function(accessory, index, arr){
                         myAccessories.push(accessory);
                     });
-                } else if (deviceCfg['type'] == "AirPurifier2") {
-                    new AirPurifier2(this, deviceCfg).forEach(function(accessory, index, arr){
+                } else if (deviceCfg['type'] == "MiAirPurifier2") {
+                    new MiAirPurifier2(this, deviceCfg).forEach(function(accessory, index, arr){
                         myAccessories.push(accessory);
                     });
-                } else if (deviceCfg['type'] == "AirPurifierPro") {
-                    new AirPurifierPro(this, deviceCfg).forEach(function(accessory, index, arr){
+                } else if (deviceCfg['type'] == "MiAirPurifierPro") {
+                    new MiAirPurifierPro(this, deviceCfg).forEach(function(accessory, index, arr){
+                        myAccessories.push(accessory);
+                    });
+                } else if (deviceCfg['type'] == "MiAirPurifier2S") {
+                    new MiAirPurifier2S(this, deviceCfg).forEach(function(accessory, index, arr){
                         myAccessories.push(accessory);
                     });
                 } else {
