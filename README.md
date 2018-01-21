@@ -10,12 +10,14 @@ Thanks for [nfarina](https://github.com/nfarina)(the author of [homebridge](http
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-airpurifier/master/images/MiAirPurifier2.jpg)
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-airpurifier/master/images/MiAirPurifierPro.jpg)
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-airpurifier/master/images/MiAirPurifier2S.jpg)
+![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-airpurifier/master/images/MiAirPurifierMAX.jpg)
 
 ## Supported Devices
 1.MiAirPurifier(小米空气净化器)   
 2.MiAirPurifier2(小米空气净化器2)   
 3.MiAirPurifierPro(小米空气净化器Pro)   
 4.MiAirPurifier2S(小米空气净化器2S)   
+5.MiAirPurifierMAX(米家空气净化器MAX) ---- coming soon   
 
 ## Pre-Requirements
 1.Make sure your IOS version is ios11 or later.   
@@ -135,6 +137,8 @@ Wait until you get output.
 For more information about token, please refer to [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol) and [miio](https://github.com/aholstenson/miio).   
 
 ## Version Logs
+### 0.1.1 (2018-01-21)
+1.remove feature of turn to manual mode when set rotation speed, because of it will affect HomeKit automation.   
 ### 0.1.0 (2017-11-16)
 1.support for XiaoMi AirPurifier2S.   
 2.modify class name, reduce the probability of conflicts due to the same class name and other plugins.   

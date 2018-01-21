@@ -284,19 +284,19 @@ MiAirPurifier2AirPurifierAccessory.prototype.getServices = function() {
                 that.device.call("set_level_favorite", [parseInt(value / 10) < 10 ? parseInt(value / 10) + 1 : 10]).then(result => {
                     that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2AirPurifierAccessory - RotationSpeed - setRotationSpeed Result: " + result);
                     if(result[0] === "ok") {
-                        that.device.call("set_mode", ["favorite"]).then(result => {
-                            that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2AirPurifierAccessory - RotationSpeed - setTargetAirPurifierState Result: " + result);
-                            if(result[0] === "ok") {
-                                targetAirPurifierStateCharacteristic.updateValue(Characteristic.TargetAirPurifierState.MANUAL);
-                                silentModeOnCharacteristic.updateValue(false);
+//                      that.device.call("set_mode", ["favorite"]).then(result => {
+//                          that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2AirPurifierAccessory - RotationSpeed - setTargetAirPurifierState Result: " + result);
+//                          if(result[0] === "ok") {
+//                              targetAirPurifierStateCharacteristic.updateValue(Characteristic.TargetAirPurifierState.MANUAL);
+//                              silentModeOnCharacteristic.updateValue(false);
                                 callback(null);
-                            } else {
-                                callback(new Error(result[0]));
-                            }
-                        }).catch(function(err) {
-                            that.platform.log.error("[MiAirPurifierPlatform][ERROR]MiAirPurifier2AirPurifierAccessory - RotationSpeed - setTargetAirPurifierState Error: " + err);
-                            callback(err);
-                        });
+//                          } else {
+//                              callback(new Error(result[0]));
+//                          }
+//                      }).catch(function(err) {
+//                          that.platform.log.error("[MiAirPurifierPlatform][ERROR]MiAirPurifier2AirPurifierAccessory - RotationSpeed - setTargetAirPurifierState Error: " + err);
+//                          callback(err);
+//                      });
                     } else {
                         callback(new Error(result[0]));
                     }
