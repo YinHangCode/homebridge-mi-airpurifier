@@ -1,12 +1,15 @@
 {
   "name": "homebridge-mi-airpurifier",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "XiaoMi air purifier plugins for HomeBridge(https://github.com/nfarina/homebridge).",
   "keywords": [
-    "homebridge-plugin"
+    "homebridge-plugin",
+    "xiaomi",
+    "mi",
+    "airpurifier"
   ],
   "author": "YinHang",
-  "license": "ISC",
+  "homepage": "https://github.com/YinHangCode/homebridge-mi-airpurifier",
   "repository": {
     "type": "git",
     "url": "https://github.com/YinHangCode/homebridge-mi-airpurifier"
@@ -15,7 +18,10 @@
     "url": "https://github.com/YinHangCode/homebridge-mi-airpurifier/issues"
   },
   "engines": {
-    "node": ">=0.12.0",
+    "node": ">=7.0.0",
     "homebridge": ">=0.4.1"
+  },
+  "dependencies": {
+    "miio": "0.14.1"
   }
 }
