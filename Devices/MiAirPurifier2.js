@@ -77,10 +77,10 @@ MiAirPurifier2AirPurifierAccessory.prototype.getServices = function() {
     var targetAirPurifierStateCharacteristic = airPurifierService.getCharacteristic(Characteristic.TargetAirPurifierState);
     var lockPhysicalControlsCharacteristic = airPurifierService.addCharacteristic(Characteristic.LockPhysicalControls);
     var rotationSpeedCharacteristic = airPurifierService.addCharacteristic(Characteristic.RotationSpeed);
-	var CurrentRelativeHumidityCharacteristic = airPurifierService.addCharacteristic(Characteristic.CurrentRelativeHumidity);
-	var pm2_5Characteristic = airPurifierService.addCharacteristic(Characteristic.PM2_5Density);
-	var AirQualityCharacteristic = airPurifierService.addCharacteristic(Characteristic.AirQuality);
-	var CurrentTemperatureCharacteristic = airPurifierService.addCharacteristic(Characteristic.CurrentTemperature);
+    var CurrentRelativeHumidityCharacteristic = airPurifierService.addCharacteristic(Characteristic.CurrentRelativeHumidity);
+    var pm2_5Characteristic = airPurifierService.addCharacteristic(Characteristic.PM2_5Density);
+    var AirQualityCharacteristic = airPurifierService.addCharacteristic(Characteristic.AirQuality);
+
     services.push(airPurifierService);
     
     silentModeOnCharacteristic
@@ -205,17 +205,6 @@ MiAirPurifier2AirPurifierAccessory.prototype.getServices = function() {
 			this.device.call("get_prop", ["humidity"]).then(result => {
                 that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2HumidityAccessory - Humidity - getHumidity: " + result);
                callback(null, result[0]);
-            }).catch(function(err) {
-              that.platform.log.error("[MiAirPurifierPlatform][ERROR]MiAirPurifier2HumidityAccessory - Humidity - getHumidity Error: " + err);
-            callback(err);
-            });
-	    }.bind(this));
-    
-    CurrentTemperatureCharacteristic
-	    .on('get', function(callback) {
-			this.device.call("get_prop", ["temp_dec"]).then(result => {
-                that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2HumidityAccessory - Humidity - getHumidity: " + result);
-               callback(null, result[0] / 10);
             }).catch(function(err) {
               that.platform.log.error("[MiAirPurifierPlatform][ERROR]MiAirPurifier2HumidityAccessory - Humidity - getHumidity Error: " + err);
             callback(err);
