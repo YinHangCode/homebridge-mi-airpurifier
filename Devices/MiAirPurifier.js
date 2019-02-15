@@ -75,6 +75,15 @@ MiAirPurifierAirPurifierAccessory.prototype.getServices = function() {
     var pm25DensityCharacteristic = airPurifierService.addCharacteristic(Characteristic.PM2_5Density);
     var airQualityCharacteristic = airPurifierService.addCharacteristic(Characteristic.AirQuality);
     services.push(airPurifierService);
+
+    setInterval(function() {
+        activeCharacteristic.getValue();
+        currentAirPurifierStateCharacteristic.getValue();
+        targetAirPurifierStateCharacteristic.getValue();
+        rotationSpeedCharacteristic.getValue();
+        pm25DensityCharacteristic.getValue();        
+        airQualityCharacteristic.getValue();
+    }, 5000);
     
     silentModeOnCharacteristic
         .on('get', function(callback) {
@@ -313,7 +322,7 @@ MiAirPurifierAirPurifierAccessory.prototype.getServices = function() {
     pm25DensityCharacteristic
 	    .on('get', function(callback) {
 			this.device.call("get_prop", ["aqi"]).then(result => {
-                that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2AirPurifierAccessory - aqi - getHumidity: " + result);
+                that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2AirPurifierAccessory - aqi - getPM25Density: " + result);
                 callback(null, result[0]);
                 
                 var airQualityValue = Characteristic.AirQuality.UNKNOWN;
@@ -332,7 +341,7 @@ MiAirPurifierAirPurifierAccessory.prototype.getServices = function() {
                 }
                 airQualityCharacteristic.updateValue(airQualityValue);
             }).catch(function(err) {
-                that.platform.log.error("[MiAirPurifierPlatform][ERROR]MiAirPurifier2AirPurifierAccessory - aqi - getHumidity Error: " + err);
+                that.platform.log.error("[MiAirPurifierPlatform][ERROR]MiAirPurifier2AirPurifierAccessory - aqi - getPM25Density Error: " + err);
                 callback(err);
             });
 	    }.bind(this));
