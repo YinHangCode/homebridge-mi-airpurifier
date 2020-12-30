@@ -14,9 +14,11 @@ MiAirPurifier2S = function(platform, config) {
     Characteristic = platform.Characteristic;
     UUIDGen = platform.UUIDGen;
     
-    this.device = new miio.Device({
+    miio.device({
         address: this.config['ip'],
         token: this.config['token']
+    }).then(device => {
+        this.device = device;
     });
 
     this.accessories = {};
