@@ -27,8 +27,31 @@ MiAirPurifier2S = function(platform, config) {
         token: this.config['token']
     }).then(device => {
         console.error("*** CONNECTED");
-        that.device.call = function(a,b) {
-            return device.call(a,b);
+        that.device.cache = {};
+        that.device.call = function(method, args) {
+            if (method === 'get_prop') {
+                var cached = that.device.cache[args[0]];
+                var now = new Date();
+                if (cached != null && ((now - cached.date) < 10000)) {
+                    console.error("*** Using cached value for " + args[0] + ": " + cached.value);
+                    return Promise.resolve([cached.value]);
+                } else {
+                    console.error("*** Fetching device value for " + args[0]);
+                    return new Promise((resolve, reject) => {
+                        device.call(method, args).then(result => {
+                            that.device.cache[args[0]] = {
+                                'date': new Date(),
+                                'value': result[0]
+                            };
+                            resolve(result);
+                        }).catch(error => {
+                            reject(error);
+                        });
+                    });
+                }
+            } else {
+                return device.call(method, args);
+            }
         }
     }).catch(error => {
         console.error("*** Failed to connect: " + error);
@@ -95,7 +118,7 @@ MiAirPurifier2SAirPurifierAccessory.prototype.getServices = function() {
     var rotationSpeedCharacteristic = airPurifierService.addCharacteristic(Characteristic.RotationSpeed);
     
     var currentTemperatureCharacteristic = airPurifierService.addCharacteristic(Characteristic.CurrentTemperature);
-	var currentRelativeHumidityCharacteristic = airPurifierService.addCharacteristic(Characteristic.CurrentRelativeHumidity);
+    var currentRelativeHumidityCharacteristic = airPurifierService.addCharacteristic(Characteristic.CurrentRelativeHumidity);
     var pm25DensityCharacteristic = airPurifierService.addCharacteristic(Characteristic.PM2_5Density);
     var airQualityCharacteristic = airPurifierService.addCharacteristic(Characteristic.AirQuality);
     services.push(airPurifierService);
@@ -103,8 +126,14 @@ MiAirPurifier2SAirPurifierAccessory.prototype.getServices = function() {
     setInterval(function() {
         activeCharacteristic.getValue();
         currentAirPurifierStateCharacteristic.getValue();
+        targetAirPurifierStateCharacteristic.getValue();
+        lockPhysicalControlsCharacteristic.getValue();
+        rotationSpeedCharacteristic.getValue();
+        currentTemperatureCharacteristic.getValue();
+        currentRelativeHumidityCharacteristic.getValue();
         pm25DensityCharacteristic.getValue();        
-    }, 10000);
+        airQualityCharacteristic.getValue();
+    }, 5000);
     
     silentModeOnCharacteristic
         .on('get', function(callback) {
@@ -345,19 +374,19 @@ MiAirPurifier2SAirPurifierAccessory.prototype.getServices = function() {
     }.bind(this));
 
     currentRelativeHumidityCharacteristic
-	    .on('get', function(callback) {
-			this.device.call("get_prop", ["humidity"]).then(result => {
+        .on('get', function(callback) {
+            this.device.call("get_prop", ["humidity"]).then(result => {
                 that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2AirPurifierAccessory - Humidity - getHumidity: " + result);
                 callback(null, result[0]);
             }).catch(function(err) {
                 that.platform.log.error("[MiAirPurifierPlatform][ERROR]MiAirPurifier2AirPurifierAccessory - Humidity - getHumidity Error: " + err);
                 callback(err);
             });
-	    }.bind(this));
+        }.bind(this));
 
     pm25DensityCharacteristic
-	    .on('get', function(callback) {
-			this.device.call("get_prop", ["aqi"]).then(result => {
+        .on('get', function(callback) {
+            this.device.call("get_prop", ["aqi"]).then(result => {
                 that.platform.log.debug("[MiAirPurifierPlatform][DEBUG]MiAirPurifier2AirPurifierAccessory - aqi - getPM25Density: " + result);
                 callback(null, result[0]);
                 
@@ -380,7 +409,7 @@ MiAirPurifier2SAirPurifierAccessory.prototype.getServices = function() {
                 that.platform.log.error("[MiAirPurifierPlatform][ERROR]MiAirPurifier2AirPurifierAccessory - aqi - getPM25Density Error: " + err);
                 callback(err);
             });
-	    }.bind(this));
+        }.bind(this));
 
     // var filterMaintenanceService = new Service.FilterMaintenance(this.name);
     var filterChangeIndicationCharacteristic = airPurifierService.getCharacteristic(Characteristic.FilterChangeIndication);
