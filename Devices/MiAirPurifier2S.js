@@ -88,14 +88,8 @@ MiAirPurifier2SAirPurifierAccessory.prototype.getServices = function() {
     setInterval(function() {
         activeCharacteristic.getValue();
         currentAirPurifierStateCharacteristic.getValue();
-        targetAirPurifierStateCharacteristic.getValue();
-        lockPhysicalControlsCharacteristic.getValue();
-        rotationSpeedCharacteristic.getValue();
-        currentTemperatureCharacteristic.getValue();
-        currentRelativeHumidityCharacteristic.getValue();
         pm25DensityCharacteristic.getValue();        
-        airQualityCharacteristic.getValue();
-    }, 5000);
+    }, 10000);
     
     silentModeOnCharacteristic
         .on('get', function(callback) {
