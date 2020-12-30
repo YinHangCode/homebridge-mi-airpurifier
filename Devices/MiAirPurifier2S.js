@@ -15,12 +15,23 @@ MiAirPurifier2S = function(platform, config) {
     UUIDGen = platform.UUIDGen;
 
     var that = this;
+
+    this.device = {
+        call: function(callback) {
+            return Promise.reject(new Error("Not connected to device yet"));
+        }
+    };
     
     miio.device({
         address: this.config['ip'],
         token: this.config['token']
     }).then(device => {
-        that.device = device;
+        console.error("*** CONNECTED");
+        that.device.call = function(a,b) {
+            return device.call(a,b);
+        }
+    }).catch(error => {
+        console.error("*** Failed to connect: " + error);
     });
 
     this.accessories = {};
