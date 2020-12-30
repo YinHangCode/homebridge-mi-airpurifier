@@ -22,6 +22,6 @@
     "homebridge": ">=0.4.1"
   },
   "dependencies": {
-    "miio": "0.14.1"
+    "miio": "0.15.6"
   }
 }
